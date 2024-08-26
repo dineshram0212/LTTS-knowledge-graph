@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "id": "barack hussein", "label": "barack hussein", "shape": "dot"}, {"color": "#97c2fc", "id": "sayn", "label": "sayn", "shape": "dot"}, {"color": "#97c2fc", "id": "bah", "label": "bah", "shape": "dot"}, {"color": "#97c2fc", "id": "american", "label": "american", "shape": "dot"}, {"color": "#97c2fc", "id": "august 4 1961 american politician", "label": "august 4 1961 american politician", "shape": "dot"}, {"color": "#97c2fc", "id": "united states", "label": "united states", "shape": "dot"}, {"color": "#97c2fc", "id": "obama", "label": "obama", "shape": "dot"}, {"color": "#97c2fc", "id": "u", "label": "u", "shape": "dot"}, {"color": "#97c2fc", "id": "illinois", "label": "illinois", "shape": "dot"}, {"color": "#97c2fc", "id": "chicago", "label": "chicago", "shape": "dot"}, {"color": "#97c2fc", "id": "harvard law school", "label": "harvard law school", "shape": "dot"}, {"color": "#97c2fc", "id": "harvard law review", "label": "harvard law review", "shape": "dot"}, {"color": "#97c2fc", "id": "university chicago law school", "label": "university chicago law school", "shape": "dot"}, {"color": "#97c2fc", "id": "2004", "label": "2004", "shape": "dot"}, {"color": "#97c2fc", "id": "keynote address", "label": "keynote address", "shape": "dot"}, {"color": "#97c2fc", "id": "hillary clinton obama", "label": "hillary clinton obama", "shape": "dot"}, {"color": "#97c2fc", "id": "democratic party", "label": "democratic party", "shape": "dot"}, {"color": "#97c2fc", "id": "democratic party president", "label": "democratic party president", "shape": "dot"}, {"color": "#97c2fc", "id": "joe biden", "label": "joe biden", "shape": "dot"}, {"color": "#97c2fc", "id": "senate", "label": "senate", "shape": "dot"}, {"color": "#97c2fc", "id": "2009 nobel peace prize laureate decision", "label": "2009 nobel peace prize laureate decision", "shape": "dot"}, {"color": "#97c2fc", "id": "george w", "label": "george w", "shape": "dot"}, {"color": "#97c2fc", "id": "bush", "label": "bush", "shape": "dot"}, {"color": "#97c2fc", "id": "iraq", "label": "iraq", "shape": "dot"}, {"color": "#97c2fc", "id": "supreme court", "label": "supreme court", "shape": "dot"}, {"color": "#97c2fc", "id": "osama bin laden", "label": "osama bin laden", "shape": "dot"}, {"color": "#97c2fc", "id": "air strikes", "label": "air strikes", "shape": "dot"}, {"color": "#97c2fc", "id": "special forces", "label": "special forces", "shape": "dot"}, {"color": "#97c2fc", "id": "greater reliance host government militaries", "label": "greater reliance host government militaries", "shape": "dot"}]);
+                  edges = new vis.DataSet([{"from": "barack hussein", "to": "sayn"}, {"from": "bah", "to": "american"}, {"from": "august 4 1961 american politician", "to": "united states"}, {"from": "obama", "to": "u"}, {"from": "illinois", "to": "obama"}, {"from": "barack hussein", "to": "chicago"}, {"from": "barack hussein", "to": "harvard law school"}, {"from": "harvard law review", "to": "barack hussein"}, {"from": "barack hussein", "to": "university chicago law school"}, {"from": "2004", "to": "barack hussein"}, {"from": "barack hussein", "to": "u"}, {"from": "obama", "to": "2004"}, {"from": "obama", "to": "keynote address"}, {"from": "hillary clinton obama", "to": "democratic party"}, {"from": "democratic party president", "to": "joe biden"}, {"from": "joe biden", "to": "obama"}, {"from": "senate", "to": "obama"}, {"from": "2009 nobel peace prize laureate decision", "to": "obama"}, {"from": "obama", "to": "george w"}, {"from": "bush", "to": "iraq"}, {"from": "obama", "to": "supreme court"}, {"from": "obama", "to": "osama bin laden"}, {"from": "bush", "to": "air strikes"}, {"from": "special forces", "to": "greater reliance host government militaries"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
