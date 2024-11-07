@@ -77,8 +77,3 @@ This project is licensed under the MIT License.
 ## Contributing
 
 Contributions are welcome! Please submit issues or pull requests for any enhancements or bug fixes.
-```
-
----
-
-This README is concise yet covers the essential information, with a link to your article for additional context. Let me know if you'd like more adjustments!
