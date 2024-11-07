@@ -1,6 +1,3 @@
-### README.md
-
-```markdown
 # Dynamic Knowledge Graph Generator
 
 This project is a **Dynamic Knowledge Graph Generator** designed to convert text data into interactive knowledge graphs, using Python and Natural Language Processing (NLP) techniques. It allows users to extract and visualize relationships from unstructured text, making it easier to explore and understand complex data.
